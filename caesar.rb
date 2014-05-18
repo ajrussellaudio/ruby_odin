@@ -1,17 +1,10 @@
 def caesar_cipher(input, shift)
-		# for each character in string
-			# if character is letter (regex)
-				# get ASCII value
-				# add shift (wrap to 26 letters)
-				# convert back to string
-			# end if
-		# end for
 	output = ""
 	input.scan(/./) do |character|
 		if character =~ /[A-Z]/
-			cipher_char = (((character.sum + shift) - "A".sum) % 26 + "A".sum).chr
+			cipher_char = wrapped_cipher(character, shift, "A")
 		elsif character =~ /[a-z]/
-			cipher_char = (((character.sum + shift) - "a".sum) % 26 + "a".sum).chr
+			cipher_char = wrapped_cipher(character, shift, "a")
 		elsif character =~ /\W/
 			cipher_char = character
 		end
@@ -19,6 +12,11 @@ def caesar_cipher(input, shift)
 	end
 	puts output
 end
+
+def wrapped_cipher(character, shift, base)
+	(((character.ord + shift) - base.ord) % 26 + base.ord).chr
+end
+
 
 puts "Enter the input string:"
 input_string = gets.chomp
