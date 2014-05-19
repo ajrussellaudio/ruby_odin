@@ -10,17 +10,11 @@ def caesar_cipher(input, shift)
 		end
 		output << cipher_char
 	end
-	puts output
+	output
 end
+
+private
 
 def wrapped_cipher(character, shift, base)
 	(((character.ord + shift) - base.ord) % 26 + base.ord).chr
 end
-
-
-puts "Enter the input string:"
-input_string = gets.chomp
-puts "Enter the shift:"
-shift = gets.chomp.to_i
-
-caesar_cipher(input_string, shift)
